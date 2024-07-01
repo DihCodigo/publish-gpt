@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             visibility_status: isIntersecting ? 'Visible' : 'Not Visible',
         });
     
-        console.log('Dados enviados para análise:', eventData);
+        //console.log('Dados enviados para análise:', eventData);
     }
     
     (function() {
@@ -84,6 +84,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initializeAd(adUnitId) {
         const adContainer = document.getElementById(adUnitId);
+        if (!adContainer) {
+            console.warn(`Elemento com ID ${adUnitId} não encontrado no DOM.`);
+            return;
+        }
         
         let adRefreshInterval;
         let debugInterval;
@@ -118,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var googletag = window.googletag || { cmd: [] };
             googletag.cmd.push(function() {
                 googletag.pubads().refresh([slot]);
-                console.log(`${adUnitId} Atualizado: ` + new Date().toLocaleTimeString());
+                //console.log(`${adUnitId} Atualizado: ` + new Date().toLocaleTimeString());
             });
         }
 
