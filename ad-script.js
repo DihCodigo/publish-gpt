@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var googletag = window.googletag || { cmd: [] };
             googletag.cmd.push(function() {
                 googletag.pubads().refresh([slot]);
-                //console.log(`${adUnitId} Atualizado: ` + new Date().toLocaleTimeString());
+                console.log(`${adUnitId} Atualizado: ` + new Date().toLocaleTimeString());
             });
         }
 
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!debugInterval) {
                 debugInterval = setInterval(() => {
                     elapsedSeconds++;
-                    //console.log(`${adUnitId} - Segundos: ` + elapsedSeconds);
+                    console.log(`${adUnitId} - Segundos: ` + elapsedSeconds);
                 }, 1000);
             }
         }
