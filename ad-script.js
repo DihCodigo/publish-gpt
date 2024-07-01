@@ -30,10 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const visibilityStatus = isIntersecting ? 'Visible' : 'Not Visible';
         const logMessage = `Viewability - AdUnit: ${adUnitId}, Status: ${visibilityStatus}, Timestamp: ${timestamp}, Viewport Size: ${viewportSize}`;
         
-        sendToAnalytics(adUnitId, isIntersecting);
+        sendToAnalytics(logMessage);
         storeLocally(logMessage);
     }
 
+    
     function sendToAnalytics(adUnitId, isIntersecting) {
         const eventData = {
             adUnitId: adUnitId,
@@ -48,16 +49,16 @@ document.addEventListener('DOMContentLoaded', function() {
             visibility_status: isIntersecting ? 'Visible' : 'Not Visible',
         });
     
-        //console.log('Dados enviados para análise:', eventData);
+        console.log('Dados enviados para análise:', eventData);
     }
     
     (function() {
-        var script1 = document.createElement('script');
-        script1.async = true;
-        script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-JR6H1X3BNK';
-        document.head.appendChild(script1);
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-JR6H1X3BNK';
+        document.head.appendChild(script);
     
-        script1.onload = function() {
+        script.onload = function() {
             window.dataLayer = window.dataLayer || [];
             function gtag() {
                 dataLayer.push(arguments);
@@ -65,18 +66,10 @@ document.addEventListener('DOMContentLoaded', function() {
             window.gtag = gtag;
             gtag('js', new Date());
             gtag('config', 'G-JR6H1X3BNK');
-
-            var script2 = document.createElement('script');
-            script2.async = true;
-            script2.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
-            document.head.appendChild(script2);
-
-            script2.onload = function() {
-                adUnitIds.forEach(initializeAd);
-            };
         };
     })();
-
+    
+    
     function storeLocally(data) {
         localStorage.setItem('viewabilityLog', data);
     }
@@ -84,9 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initializeAd(adUnitId) {
         const adContainer = document.getElementById(adUnitId);
-        if (!adContainer) {
-            return;
-        }
+        
         let adRefreshInterval;
         let debugInterval;
         let elapsedSeconds = 0;
@@ -131,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!debugInterval) {
                 debugInterval = setInterval(() => {
                     elapsedSeconds++;
-                    console.log(`${adUnitId} - Segundos: ` + elapsedSeconds);
+                    //console.log(`${adUnitId} - Segundos: ` + elapsedSeconds);
                 }, 1000);
             }
         }
@@ -165,4 +156,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         observer.observe(adContainer);
     }
+    adUnitIds.forEach(initializeAd);
 });
