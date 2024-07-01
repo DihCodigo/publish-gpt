@@ -77,7 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initializeAd(adUnitId) {
         const adContainer = document.getElementById(adUnitId);
-        
+        if (!adContainer) {
+            console.warn(`Elemento com ID ${adUnitId} não encontrado no DOM.`);
+            return;
+        }
         let adRefreshInterval;
         let debugInterval;
         let elapsedSeconds = 0;
