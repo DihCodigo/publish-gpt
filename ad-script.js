@@ -109,7 +109,7 @@ function initializeAd(adUnitId) {
                 )
                 .addService(googletag.pubads())
                 .setTargeting("pos", "header")
-                .setTargeting("visible", "Not Visible"); // Definir o targeting inicial como 'Not Visible'
+                .setTargeting("visible", "Not Visible");
         });
         console.log(`${adUnitId} Slot Definido: ` + new Date().toLocaleTimeString());
     }
@@ -162,7 +162,6 @@ function initializeAd(adUnitId) {
                 if (!slot) {
                     defineAdSlot();
                 }
-                // Atualizar o targeting para 'Visible' quando o anúncio estiver visível
                 googletag.cmd.push(function() {
                     slot.setTargeting("visible", "Visible");
                     googletag.pubads().refresh([slot]);
@@ -170,7 +169,6 @@ function initializeAd(adUnitId) {
                 startAdRefresh();
                 displayAd();
             } else {
-                // Atualizar o targeting para 'Not Visible' quando o anúncio não estiver visível
                 googletag.cmd.push(function() {
                     slot.setTargeting("visible", "Not Visible");
                     googletag.pubads().refresh([slot]);
