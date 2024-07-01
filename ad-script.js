@@ -33,18 +33,6 @@ function trackViewability(adUnitId, isIntersecting) {
     
     sendToAnalytics(adUnitId, isIntersecting);
     storeLocally(logMessage);
-    
-    // Atualizar o targeting do slot específico com base na visibilidade
-    if (window.googletag && window.googletag.pubadsReady) {
-        const googletag = window.googletag;
-        googletag.cmd.push(function() {
-            const slot = googletag.pubads().getSlots().find(s => s.getSlotElementId() === adUnitId);
-            if (slot) {
-                slot.setTargeting("visible", visibilityStatus);
-                console.log(`${adUnitId} targeting atualizado para: ${visibilityStatus}`);
-            }
-        });
-    }
 }
 
 function sendToAnalytics(adUnitId, isIntersecting) {
@@ -120,7 +108,8 @@ function initializeAd(adUnitId) {
                     adUnitId
                 )
                 .addService(googletag.pubads())
-                .setTargeting("pos", "header");
+                .setTargeting("pos", "header")
+                .setTargeting("visible", "Not Visible"); // Definir o targeting inicial como 'Not Visible'
         });
         console.log(`${adUnitId} Slot Definido: ` + new Date().toLocaleTimeString());
     }
@@ -173,9 +162,19 @@ function initializeAd(adUnitId) {
                 if (!slot) {
                     defineAdSlot();
                 }
+                // Atualizar o targeting para 'Visible' quando o anúncio estiver visível
+                googletag.cmd.push(function() {
+                    slot.setTargeting("visible", "Visible");
+                    googletag.pubads().refresh([slot]);
+                });
                 startAdRefresh();
                 displayAd();
             } else {
+                // Atualizar o targeting para 'Not Visible' quando o anúncio não estiver visível
+                googletag.cmd.push(function() {
+                    slot.setTargeting("visible", "Not Visible");
+                    googletag.pubads().refresh([slot]);
+                });
                 stopAdRefresh();
             }
         });
