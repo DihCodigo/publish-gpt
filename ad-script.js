@@ -57,13 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
         script1.async = true;
         script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-JR6H1X3BNK';
         document.head.appendChild(script1);
-
-        var script2 = document.createElement('script');
-        script2.async = true;
-        script2.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
-        document.head.appendChild(script2);
     
-        script.onload = function() {
+        script1.onload = function() {
             window.dataLayer = window.dataLayer || [];
             function gtag() {
                 dataLayer.push(arguments);
@@ -72,9 +67,14 @@ document.addEventListener('DOMContentLoaded', function() {
             gtag('js', new Date());
             gtag('config', 'G-JR6H1X3BNK');
         };
+    
+        var script2 = document.createElement('script');
+        script2.async = true;
+        script2.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+        document.head.appendChild(script2);
     })();
     
-    
+ 
     function storeLocally(data) {
         localStorage.setItem('viewabilityLog', data);
     }
