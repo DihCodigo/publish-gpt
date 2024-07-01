@@ -53,10 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     (function() {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-JR6H1X3BNK';
-        document.head.appendChild(script);
+        var script1 = document.createElement('script');
+        script1.async = true;
+        script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-JR6H1X3BNK';
+        document.head.appendChild(script1);
+
+        var script2 = document.createElement('script');
+        script2.async = true;
+        script2.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+        document.head.appendChild(script2);
     
         script.onload = function() {
             window.dataLayer = window.dataLayer || [];
