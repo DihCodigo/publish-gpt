@@ -67,6 +67,14 @@ document.addEventListener('DOMContentLoaded', function() {
             gtag('js', new Date());
             gtag('config', 'G-JR6H1X3BNK');
         };
+        var script1 = document.createElement('script');
+            script1.async = true;
+            script1.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+            document.head.appendChild(script1);
+
+            script1.onload = function() {
+                adUnitIds.forEach(initializeAd);
+        };
     })();
     
     
