@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 googletag.cmd.push(function() {
                     adUnitIds.forEach(initializeAd);
                     googletag.enableServices();
-                    refresh();
                 });
             };
         };
