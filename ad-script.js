@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const adUnitIds = [
+    const adUnitId = [
         "r7_header", "r7_texto_1", "r7_texto_2", "r7_texto_3", "r7_texto_4", "r7_retangulo_lateral_1", 
         "r7_retangulo_lateral_2", "r7_retangulo_lateral_3", "r7_sticky_lateral", "r7_stickybottom"
     ];
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.head.appendChild(script2);
 
             script2.onload = function() {
-                adUnitIds.forEach(initializeAd);
+                adUnitId.forEach(initializeAd);
             };
         };
     })();
