@@ -27,10 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function trackViewability(adUnitId, isIntersecting) {
         const timestamp = new Date().toISOString();
         const viewportSize = `${window.innerWidth}x${window.innerHeight}`;
-        const adPosition = getAdPosition(adUnitId);
         const visibilityStatus = isIntersecting ? 'Visible' : 'Not Visible';
         
-        const logMessage = `Viewability - AdUnit: ${adUnitId}, Status: ${visibilityStatus}, Timestamp: ${timestamp}, Viewport Size: ${viewportSize}, Ad Position: ${adPosition}`;
+        const logMessage = `Viewability - AdUnit: ${adUnitId}, Status: ${visibilityStatus}, Timestamp: ${timestamp}, Viewport Size: ${viewportSize}`;
         
         sendToAnalytics(logMessage);
         
