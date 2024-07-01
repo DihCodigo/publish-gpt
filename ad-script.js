@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const visibilityStatus = isIntersecting ? 'Visible' : 'Not Visible';
         const logMessage = `Viewability - AdUnit: ${adUnitId}, Status: ${visibilityStatus}, Timestamp: ${timestamp}, Viewport Size: ${viewportSize}`;
         
-        sendToAnalytics(logMessage);
+        sendToAnalytics(adUnitId, isIntersecting);
         storeLocally(logMessage);
     }
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
         console.log('Dados enviados para análise:', eventData);
     }
-
+    
     (function() {
         var script1 = document.createElement('script');
         script1.async = true;
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var googletag = window.googletag || { cmd: [] };
                 googletag.cmd.push(function() {
                     adUnitIds.forEach(initializeAd);
-                    googletag.enableServices();
+                    googletag.enableServices(); // Ativa os serviços do GPT após inicialização
                 });
             };
         };
