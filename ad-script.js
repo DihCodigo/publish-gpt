@@ -184,6 +184,8 @@ function getAdUnitPath(url) {
         return "/7542/parceiros/NewsMotor";
     } else if (url.includes("belezademulher.com.br")) {
         return "/7542/parceiros/BelezaDeMulher";
+    } else if (url.includes("https://dihcodigo.github.io/mitoouverdadeLPWords/")) {
+        return "/7542/parceiros/dihcodigo";
     } else {
         return "/7542/parceiros/default";
     }
