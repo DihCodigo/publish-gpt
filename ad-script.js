@@ -30,11 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const visibilityStatus = isIntersecting ? 'Visible' : 'Not Visible';
         const logMessage = `Viewability - AdUnit: ${adUnitId}, Status: ${visibilityStatus}, Timestamp: ${timestamp}, Viewport Size: ${viewportSize}`;
         
-        sendToAnalytics(logMessage);
+        sendToAnalytics(adUnitId, isIntersecting);
         storeLocally(logMessage);
     }
 
-    
     function sendToAnalytics(adUnitId, isIntersecting) {
         const eventData = {
             adUnitId: adUnitId,
@@ -66,15 +65,18 @@ document.addEventListener('DOMContentLoaded', function() {
             window.gtag = gtag;
             gtag('js', new Date());
             gtag('config', 'G-JR6H1X3BNK');
+
+            var script2 = document.createElement('script');
+            script2.async = true;
+            script2.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+            document.head.appendChild(script2);
+
+            script2.onload = function() {
+                adUnitIds.forEach(initializeAd);
+            };
         };
-    
-        var script2 = document.createElement('script');
-        script2.async = true;
-        script2.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
-        document.head.appendChild(script2);
     })();
-    
- 
+
     function storeLocally(data) {
         localStorage.setItem('viewabilityLog', data);
     }
@@ -161,5 +163,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         observer.observe(adContainer);
     }
-    adUnitIds.forEach(initializeAd);
 });
