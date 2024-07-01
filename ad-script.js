@@ -33,6 +33,18 @@ function trackViewability(adUnitId, isIntersecting) {
     
     sendToAnalytics(adUnitId, isIntersecting);
     storeLocally(logMessage);
+    
+    // Atualizar o targeting do slot específico com base na visibilidade
+    if (window.googletag && window.googletag.pubadsReady) {
+        const googletag = window.googletag;
+        googletag.cmd.push(function() {
+            const slot = googletag.pubads().getSlots().find(s => s.getSlotElementId() === adUnitId);
+            if (slot) {
+                slot.setTargeting("visible", visibilityStatus);
+                console.log(`${adUnitId} targeting atualizado para: ${visibilityStatus}`);
+            }
+        });
+    }
 }
 
 function sendToAnalytics(adUnitId, isIntersecting) {
