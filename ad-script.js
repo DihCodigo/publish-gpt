@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
         storeLocally(logMessage);
     }
 
-    
     function sendToAnalytics(adUnitId, isIntersecting) {
         const eventData = {
             adUnitId: adUnitId,
@@ -51,14 +50,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
         console.log('Dados enviados para análise:', eventData);
     }
-    
+
     (function() {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-JR6H1X3BNK';
-        document.head.appendChild(script);
+        var script1 = document.createElement('script');
+        script1.async = true;
+        script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-JR6H1X3BNK';
+        document.head.appendChild(script1);
     
-        script.onload = function() {
+        script1.onload = function() {
             window.dataLayer = window.dataLayer || [];
             function gtag() {
                 dataLayer.push(arguments);
@@ -66,22 +65,25 @@ document.addEventListener('DOMContentLoaded', function() {
             window.gtag = gtag;
             gtag('js', new Date());
             gtag('config', 'G-JR6H1X3BNK');
-        };
-        var script1 = document.createElement('script');
-            script1.async = true;
-            script1.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
-            document.head.appendChild(script1);
 
-            script1.onload = function() {
-                adUnitIds.forEach(initializeAd);
+            var script2 = document.createElement('script');
+            script2.async = true;
+            script2.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+            document.head.appendChild(script2);
+
+            script2.onload = function() {
+                var googletag = window.googletag || { cmd: [] };
+                googletag.cmd.push(function() {
+                    adUnitIds.forEach(initializeAd);
+                    googletag.enableServices();
+                });
+            };
         };
     })();
-    
-    
+
     function storeLocally(data) {
         localStorage.setItem('viewabilityLog', data);
     }
-    
 
     function initializeAd(adUnitId) {
         const adContainer = document.getElementById(adUnitId);
@@ -89,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.warn(`Elemento com ID ${adUnitId} não encontrado no DOM.`);
             return;
         }
+
         let adRefreshInterval;
         let debugInterval;
         let elapsedSeconds = 0;
@@ -112,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
         function displayAd() {
             var googletag = window.googletag || { cmd: [] };
             googletag.cmd.push(function() {
-                googletag.enableServices();
                 googletag.display(adUnitId);
             });
             console.log(`${adUnitId} Exibido: ` + new Date().toLocaleTimeString());
@@ -167,5 +169,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         observer.observe(adContainer);
     }
-    adUnitIds.forEach(initializeAd);
 });
