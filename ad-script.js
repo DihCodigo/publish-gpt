@@ -53,13 +53,12 @@ function sendToAnalytics(adUnitId, isIntersecting) {
 }
 
 (function() {
-    // Chamada da função getAnalyticsCode para obter o código do Google Analytics baseado na URL
     const analyticsCode = getAnalyticsCode(window.location.href);
     console.log("~~ Analytics Code " + analyticsCode);
 
     var script1 = document.createElement('script');
     script1.async = true;
-    script1.src = 'https://www.googletagmanager.com/gtag/js?id=${analyticsCode}';
+    script1.src = 'https://www.googletagmanager.com/gtag/js?id=`${analyticsCode}`';
     document.head.appendChild(script1);
 
     script1.onload = function() {
@@ -69,7 +68,7 @@ function sendToAnalytics(adUnitId, isIntersecting) {
         }
         window.gtag = gtag;
         gtag('js', new Date());
-        gtag('config', '${analyticsCode}');
+        gtag('config', `${analyticsCode}`);
 
         var script2 = document.createElement('script');
         script2.async = true;
@@ -220,8 +219,8 @@ function getAnalyticsCode(url) {
     } else if (url.includes("belezademulher.com.br")) {
         return "G-CCCCCCCCCC";
     } else if (url.includes("dihcodigo.github.io")) {
-        return "G-DDDDDDDDDD";
+        return "G-JR6H1X3BNK";
     } else {
-        return "G-JR6H1X3BNK"; // Default Analytics code
+        return "G-CODE";
     }
 }
