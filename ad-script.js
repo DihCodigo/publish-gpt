@@ -55,7 +55,7 @@ function sendToAnalytics(adUnitId, isIntersecting) {
 (function() {
     // Chamada da função getAnalyticsCode para obter o código do Google Analytics baseado na URL
     const analyticsCode = getAnalyticsCode(window.location.href);
-    console.log("~~ Analytics Code " + '${analyticsCode}');
+    console.log("~~ Analytics Code " + analyticsCode);
 
     var script1 = document.createElement('script');
     script1.async = true;
