@@ -53,9 +53,13 @@ function sendToAnalytics(adUnitId, isIntersecting) {
 }
 
 (function() {
+    // Chamada da função getAnalyticsCode para obter o código do Google Analytics baseado na URL
+    const analyticsCode = getAnalyticsCode(window.location.href);
+    console.log("~~ Analytics Code " + '${analyticsCode}');
+
     var script1 = document.createElement('script');
     script1.async = true;
-    script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-JR6H1X3BNK';
+    script1.src = 'https://www.googletagmanager.com/gtag/js?id=${analyticsCode}';
     document.head.appendChild(script1);
 
     script1.onload = function() {
@@ -65,7 +69,7 @@ function sendToAnalytics(adUnitId, isIntersecting) {
         }
         window.gtag = gtag;
         gtag('js', new Date());
-        gtag('config', 'G-JR6H1X3BNK');
+        gtag('config', '${analyticsCode}');
 
         var script2 = document.createElement('script');
         script2.async = true;
@@ -197,5 +201,27 @@ function getAdUnitPath(url) {
         return "/7542/parceiros/dihcodigo";
     } else {
         return "/7542/parceiros/default";
+    }
+}
+
+
+
+function getAnalyticsCode(url) {
+    if (url.includes("overplay.com.br")) {
+        return "G-XXXXXXXXXX";
+    } else if (url.includes("www.amomeupet.org")) {
+        return "G-YYYYYYYYYY";
+    } else if (url.includes("diarural.com.br")) {
+        return "G-ZZZZZZZZZZ";
+    } else if (url.includes("www.efarsas.com")) {
+        return "G-AAAAAAAAAA";
+    } else if (url.includes("www.newsmotor.com.br")) {
+        return "G-BBBBBBBBBB";
+    } else if (url.includes("belezademulher.com.br")) {
+        return "G-CCCCCCCCCC";
+    } else if (url.includes("dihcodigo.github.io")) {
+        return "G-DDDDDDDDDD";
+    } else {
+        return "G-JR6H1X3BNK"; // Default Analytics code
     }
 }
