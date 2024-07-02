@@ -54,7 +54,7 @@ function sendToAnalytics(adUnitId, isIntersecting) {
 
 (function() {
     const analyticsCode = getAnalyticsCode(window.location.href);
-    console.log("~~ Analytics Code " + analyticsCode);
+    console.log("~~ Analytics Cod: " + analyticsCode);
 
     var script1 = document.createElement('script');
     script1.async = true;
